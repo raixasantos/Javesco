@@ -1,4 +1,4 @@
-package Cliente;
+package Emprestimo;
 
 public class Juros {
     private Integer prazoMeses;
