@@ -1,5 +1,7 @@
 package Cliente;
 
+import Emprestimo.Financiamento;
+
 public class Cliente {
     private String nome;
     private String CPF;
@@ -46,7 +48,7 @@ public class Cliente {
         return idade;
     }
 
-    public void setIdade(Idade idade_) {
+    public void setIdade(Integer idade_) {
         idade = idade_;
     }
 
