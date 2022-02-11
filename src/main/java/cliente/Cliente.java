@@ -4,80 +4,50 @@ import emprestimo.Financiamento;
 
 public class Cliente {
     private String nome;
-    private String CPF;
     private Integer idade;
     private Double score;
     private Integer pontos;
     private Double valorRenda;
     private boolean negativado;
-    private Financiamento financiamento;
 
-    Cliente(String nome, Double valorRenda, Integer idade, Double score) {}
+    Cliente(String nome, Double valorRenda, Integer idade, Double score) {
+        this.nome = nome;
+        this.valorRenda = valorRenda;
+        this.idade = idade;
+        this.score = score;
+    }
+
+    public void setPontos(Integer pontos) {
+        this.pontos = pontos;
+    }
+
+    public void setNegativado(bool negativado) {
+        this.negativado = negativado;
+    }
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome_) {
-        nome = nome_;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String cpf_) {
-        CPF = cpf_;
     }
 
     public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(Integer idade_) {
-        idade = idade_;
-    }
-
     public Integer getPontos() {
         return pontos;
-    }
-
-    public void setPontos(Integer pontos_) {
-        pontos = pontos_;
     }
 
     public Double getValorRenda() {
         return valorRenda;
     }
 
-    public void setValorRenda(Double valorRenda_) {
-        valorRenda = valorRenda_;
-    }
-
     public Double getScore() {
         return score;
-    }
-
-    public void setScore(Double score_) {
-        score = score_;
     }
 
     public boolean getNegativado() {
         return negativado;
     }
-
-    public void setNegativado(boolean negativado_) {
-        negativado = negativado_;
-    }
-
-    public Financiamento getFinanciamento() {
-        return financiamento;
-    }
-
-    public void setFinanciamento(Financiamento financiamento_) {
-        financiamento = financiamento_;
-    }
-
 
 
 }
