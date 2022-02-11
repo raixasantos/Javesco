@@ -1,6 +1,6 @@
-package Cliente;
+package cliente;
 
-import Emprestimo.Financiamento;
+import emprestimo.Financiamento;
 
 public class Cliente {
     private String nome;

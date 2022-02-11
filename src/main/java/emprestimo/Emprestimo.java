@@ -1,4 +1,4 @@
-package Emprestimo;
+package emprestimo;
 
 import java.util.Date;
 
