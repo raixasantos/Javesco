@@ -14,20 +14,6 @@ public class Cliente {
 
     Cliente(String nome, Double valorRenda, Integer idade, Double score) {}
 
-    public boolean validarScore(){
-        if(score >= 650) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validarIdade(){
-        if(idade < 18 || idade > 65) {
-            return false;
-        }
-        return false;
-    }
-
     public String getNome() {
         return nome;
     }
