@@ -17,13 +17,12 @@ public class Cliente {
         this.score = score;
     }
 
-    public void setPontos(Integer pontos) {
-        this.pontos = pontos;
-    }
+    Cliente() { }
 
-    public void setNegativado(bool negativado) {
-        this.negativado = negativado;
-    }
+    public void setPontos(Integer pontos) { this.pontos = pontos; }
+
+    public void setNegativado(bool negativado) { this.negativado = negativado; }
+
 
     public String getNome() {
         return nome;
