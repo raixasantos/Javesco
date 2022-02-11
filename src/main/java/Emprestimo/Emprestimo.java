@@ -8,7 +8,7 @@ public class Emprestimo {
     private Double valorTotal;
     private Juros juros;
 
-    public Emprestimo(Date dataInicio, Date dataFim, Double valorTotal, Juros juros_){
+    public Emprestimo(Date dataInicio, Date dataFim, Double valorTotal, Juros juros){
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.valorTotal = valorTotal;
