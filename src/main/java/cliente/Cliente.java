@@ -10,19 +10,18 @@ public class Cliente {
     private Double valorRenda;
     private boolean negativado;
 
-    Cliente(String nome, Double valorRenda, Integer idade, Double score) {
+    public Cliente(String nome, Double valorRenda, Integer idade, Double score) {
         this.nome = nome;
         this.valorRenda = valorRenda;
         this.idade = idade;
         this.score = score;
     }
 
-    Cliente() { }
+    public Cliente() { }
 
     public void setPontos(Integer pontos) { this.pontos = pontos; }
 
-    public void setNegativado(bool negativado) { this.negativado = negativado; }
-
+    public void setNegativado(boolean negativado) { this.negativado = negativado; }
 
     public String getNome() {
         return nome;
