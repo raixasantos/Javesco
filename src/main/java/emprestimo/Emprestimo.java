@@ -4,7 +4,6 @@ public class Emprestimo {
     private Integer prazoMeses;
     private Double capital;
     private Double taxaJuros;
-    private Double taxaImposto;
     private TipoEmprestimo tipo;
 
     public Emprestimo(Double capital, TipoEmprestimo tipo) {
@@ -19,7 +18,6 @@ public class Emprestimo {
     }
 
     public Double calcularMontante() {
-        // montante = capital * (1 + juros)^meses
         return capital * Math.pow((1 + taxaJuros), Math.round(prazoMeses / 12));
     }
 
