@@ -15,7 +15,7 @@ public class Cliente {
         this.score = score;
     }
 
-    public Cliente() { }
+    public Cliente() {}
 
     public void setPontos(Integer pontos) { this.pontos = pontos; }
 
@@ -45,5 +45,19 @@ public class Cliente {
         return negativado;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public void setValorRenda(Double valorRenda) {
+        this.valorRenda = valorRenda;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
 }
