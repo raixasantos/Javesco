@@ -3,7 +3,6 @@ package emprestimo;
 import java.util.ArrayList;
 import java.util.List;
 
-import emprestimo.Juros;
 import cliente.Cliente;
 
 public class GerenciadorFinanciamento {
