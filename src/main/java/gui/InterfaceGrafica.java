@@ -89,7 +89,7 @@ public class InterfaceGrafica {
             System.out.println(" (" + tipo.getTipoFinanciamento() + " com taxa de " + Math.round(tipo.getTaxa()*100) + "%)");
             System.out.println("Suas opções de parcelamento são:");
             intervalo.forEach(juros -> {
-                System.out.println("        -" + juros.getPrazoMeses() + " parcelas de R$" + df.format(juros.getParcela()) + ". Total de R$" + df.format(juros.calcularMontante()) + ".");
+                System.out.println("        -" + juros.getPrazoMeses() + " parcelas de R$" + df.format(juros.getParcela()) + ". Total de R$" + df.format(juros.getMontante()) + ".");
             });
             scanner.nextLine();// GAMBIARRA
             System.out.println("[Aperte a tecla enter para voltar ao menu]");

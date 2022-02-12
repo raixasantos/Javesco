@@ -17,7 +17,7 @@ public class Emprestimo {
         this.prazoMeses = prazoMeses;
     }
 
-    public Double calcularMontante() {
+    public Double getMontante() {
         return capital * Math.pow((1 + taxaJuros), Math.round(prazoMeses / 12));
     }
 
@@ -26,7 +26,7 @@ public class Emprestimo {
     }
 
     public Double getParcela() {
-        return calcularMontante() / prazoMeses;
+        return getMontante() / prazoMeses;
     }
 
     public Integer getPrazoMeses() {
