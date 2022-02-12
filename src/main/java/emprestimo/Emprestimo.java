@@ -1,33 +1,39 @@
 package emprestimo;
 
-import java.util.Date;
-
 public class Emprestimo {
-    private Date dataInicio;
-    private Date dataFim;
-    private Double valorTotal;
-    private Juros juros;
+    private Integer prazoMeses;
+    private Double capital;
+    private Double taxaJuros;
+    private Double taxaImposto;
+    private TipoEmprestimo tipo;
 
-    public Emprestimo(Date dataInicio, Date dataFim, Double valorTotal, Juros juros){
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        this.valorTotal = valorTotal;
-        this.juros = juros;
+    public Emprestimo(Double capital, TipoEmprestimo tipo) {
+        this.capital = capital;
+        this.tipo = tipo;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public Emprestimo(Double capital, Double taxaJuros, Integer prazoMeses) {
+        this.capital = capital;
+        this.taxaJuros = taxaJuros;
+        this.prazoMeses = prazoMeses;
     }
 
-    public Date getDataFim() {
-        return dataFim;
+    public Double calcularMontante() {
+        // montante = capital * (1 + juros)^meses
+        return capital * Math.pow((1 + taxaJuros), Math.round(prazoMeses / 12));
     }
 
-    public Double getValorTotal() {
-        return valorTotal;
+    public Double getCapital() {
+        return capital;
     }
 
-    public Juros getJuros() {
-        return juros;
+    public Double getParcela() {
+        return calcularMontante() / prazoMeses;
     }
+
+    public Integer getPrazoMeses() {
+        return prazoMeses;
+    }
+
+    public Double getTaxaJuros() { return tipo.getTaxa(); }
 }

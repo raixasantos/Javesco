@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import cliente.Cliente;
-import emprestimo.Bem;
-import emprestimo.GerenciadorFinanciamento;
-import emprestimo.Juros;
+import emprestimo.TipoEmprestimo;
+import gerenciador.emprestimo.GerenciadorEmprestimo;
+import emprestimo.Emprestimo;
 
 public class InterfaceGrafica {
 
@@ -18,33 +18,29 @@ public class InterfaceGrafica {
 
     InterfaceGrafica() {
     }
-    
-    /**
-     * 
-     * 
-     */
-    public static void limparConsole(){
+
+    public static void limparConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     /**
-     * 
      * @return
      */
     public static Cliente buildCliente() {
-        Cliente cliente = new Cliente();
+        String nome;
+        Double valorRenda;
+        Integer idade;
+        Double score;
 
         limparConsole();
         System.out.print("Digite seu nome: ");
-        String nome = scanner.nextLine();
-        cliente.setNome(nome);
+        nome = scanner.nextLine();
 
         limparConsole();
         System.out.print("Digite sua renda: ");
         try {
-            Double valorRenda = scanner.nextDouble();
-            cliente.setValorRenda(valorRenda);
+            valorRenda = scanner.nextDouble();
         } catch (java.util.InputMismatchException e) {
             limparConsole();
             System.out.println("Formato da entrada de 'renda' invalido!");
@@ -54,8 +50,7 @@ public class InterfaceGrafica {
         limparConsole();
         System.out.print("Digite sua idade: ");
         try {
-            Integer idade = scanner.nextInt();
-            cliente.setIdade(idade);
+            idade = scanner.nextInt();
         } catch (java.util.InputMismatchException e) {
             limparConsole();
             System.out.println("Formato da entrada de 'idade' invalido!");
@@ -65,8 +60,7 @@ public class InterfaceGrafica {
         limparConsole();
         System.out.print("Digite seu score: ");
         try {
-            Double score = scanner.nextDouble();
-            cliente.setScore(score);
+            score = scanner.nextDouble();
         } catch (java.util.InputMismatchException e) {
             limparConsole();
             System.out.println("Formato da entrada de 'score' invalido!");
@@ -75,36 +69,38 @@ public class InterfaceGrafica {
 
         limparConsole();
 
-        return cliente;
+        return new Cliente(nome, valorRenda, idade, score);
     }
 
     /**
-     * 
      * @param cliente
-     * @param tipoBem
+     * @param tipo
      */
-    public static void simularFinanciamento(Cliente cliente, Bem tipoBem) {
+    public static void simularFinanciamento(Cliente cliente, TipoEmprestimo tipo) {
         System.out.print("Digite o valor do emprestimo desejado: ");
-        Integer valorFinanciamento = scanner.nextInt();
+        Double capital = scanner.nextDouble();
+        Emprestimo emprestimoSolicitado = new Emprestimo(capital, tipo);
         limparConsole();
 
-        if(GerenciadorFinanciamento.validarFinanciamento(valorFinanciamento, cliente)) {
-            List<Juros> intervalo = GerenciadorFinanciamento.calcularIntervaloParcelas(valorFinanciamento, cliente);
-            System.out.println("Parabéns "+cliente.getNome()+"! Você foi aprovado em seu financiamento de R$"+valorFinanciamento+",00! (Financiamento "+tipoBem.getTipoFinanciamento()+")");
+        List<Emprestimo> intervalo = GerenciadorEmprestimo.validarCredito(emprestimoSolicitado, cliente);
+
+        if (!intervalo.isEmpty()) {
+            System.out.print("Parabéns " + cliente.getNome() + "! Você foi aprovado em seu crédito de R$" + df.format(capital) + "!");
+            System.out.println(" (" + tipo.getTipoFinanciamento() + " com taxa de " + Math.round(tipo.getTaxa()*100) + "%)");
             System.out.println("Suas opções de parcelamento são:");
             intervalo.forEach(juros -> {
-                System.out.println("-"+juros.getPrazoMeses()+" parcelas de R$"+df.format(juros.getParcela())+ ". Total de R$"+df.format(juros.calcularMontante())+".");
+                System.out.println("        -" + juros.getPrazoMeses() + " parcelas de R$" + df.format(juros.getParcela()) + ". Total de R$" + df.format(juros.calcularMontante()) + ".");
             });
             scanner.nextLine();// GAMBIARRA
-            System.out.println("[Aperte qualquer tecla para voltar ao menu]");
+            System.out.println("[Aperte a tecla enter para voltar ao menu]");
             scanner.nextLine();// GAMBIARRA
             limparConsole();
-        }else
-            System.out.println("Financiamento negado!");
+        } else
+            System.out.println(tipo.getTipoFinanciamento() + " negado!");
     }
 
     /**
-     * 
+     *
      */
     public static void printAssinatura() {
         System.out.println("=============================");
@@ -113,7 +109,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     * 
+     *
      */
     public static void printDespedida() {
         scanner.close();
@@ -123,7 +119,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     * 
+     *
      */
     public static void printOpcoesMenu() {
         switch (paginaMenu) {
@@ -133,6 +129,7 @@ public class InterfaceGrafica {
             case 1:
                 System.out.println("1 - Financiamento veicular");
                 System.out.println("2 - Financiamento imobiliário");
+                System.out.println("3 - Empréstimo pessoal");
                 break;
         }
         System.out.println("0 - Sair");
@@ -140,7 +137,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     * 
+     *
      */
     public static void menu() {
         Cliente cliente = new Cliente();
@@ -174,10 +171,13 @@ public class InterfaceGrafica {
                 case 1:
                     switch (escolha) {
                         case "1":
-                            simularFinanciamento(cliente, Bem.VEICULO);
+                            simularFinanciamento(cliente, TipoEmprestimo.VEICULO);
                             break;
                         case "2":
-                            simularFinanciamento(cliente, Bem.IMOVEL);
+                            simularFinanciamento(cliente, TipoEmprestimo.IMOVEL);
+                            break;
+                        case "3":
+                            simularFinanciamento(cliente, TipoEmprestimo.CREDITO);
                             break;
                         case "0":
                             printDespedida();
