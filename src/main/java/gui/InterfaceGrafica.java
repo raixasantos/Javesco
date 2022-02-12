@@ -9,6 +9,9 @@ import emprestimo.TipoEmprestimo;
 import gerenciador.emprestimo.GerenciadorEmprestimo;
 import emprestimo.Emprestimo;
 
+/**
+ * Classe que simula a interface gráfica do Banco Javesco
+ */
 public class InterfaceGrafica {
 
     private static Integer paginaMenu;
@@ -19,13 +22,17 @@ public class InterfaceGrafica {
     InterfaceGrafica() {
     }
 
+    /**
+     * Método que limpa a tela para não ficar bagunçado com as informações
+     */
     public static void limparConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     /**
-     * @return
+     * Método que colhe as informações do cliente
+     * @return retorna as informações preenchidas pelo cliente para a Classe Cliente onde suas informações estão guardadas
      */
     public static Cliente buildCliente() {
         String nome;
@@ -73,8 +80,10 @@ public class InterfaceGrafica {
     }
 
     /**
-     * @param cliente
-     * @param tipo
+     * Método que colhe informação do cliente, faz a chamada da simulação e apresenta o resultado final (aprovado ou reprovado)
+     *
+     * @param cliente Colhe informação pessoal do cliente para realizar a simulação
+     * @param tipo Colhe o tipo do Empréstimo/Financiamento para realizar a simulação
      */
     public static void simularFinanciamento(Cliente cliente, TipoEmprestimo tipo) {
         System.out.print("Digite o valor do emprestimo desejado: ");
@@ -100,7 +109,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     *
+     * Método que chama o nome do Banco com sua interface
      */
     public static void printAssinatura() {
         System.out.println("=============================");
@@ -109,7 +118,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     *
+     * Método que faz a despedida após a simulação ser realizada
      */
     public static void printDespedida() {
         scanner.close();
@@ -119,7 +128,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     *
+     * Método em que o cliente escolhe as opções de operações do banco
      */
     public static void printOpcoesMenu() {
         switch (paginaMenu) {
@@ -137,7 +146,7 @@ public class InterfaceGrafica {
     }
 
     /**
-     *
+     * Método que colhe as algumas opções escolhidas pelo cliente
      */
     public static void menu() {
         Cliente cliente = new Cliente();
