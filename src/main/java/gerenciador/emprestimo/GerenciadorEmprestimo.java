@@ -33,6 +33,13 @@ public class GerenciadorEmprestimo {
         return (cliente.getScore() >= 600);
     }
 
+    /**
+     *  Faz a validação do crédito para poder liberar o valor que o cliente solicita
+     *
+     * @param emprestimo informações da classe Empréstimo que são usadas na validação
+     * @param cliente informações pessoais do cliente para validar o crédito
+     * @return uma lista de empréstimos
+     */
     public static List<Emprestimo> validarCredito(Emprestimo emprestimo, Cliente cliente) {
         List<Emprestimo> intervalo = new ArrayList<>();
         boolean boolIdade = validarIdade(cliente);
@@ -42,6 +49,13 @@ public class GerenciadorEmprestimo {
         return intervalo;
     }
 
+    /**
+     * Calcula os empréstimos em tempos diferentes para o cliente poder escolher o melhor prazo e valor de parcela
+     *
+     * @param emprestimoSolicitado valor solicitado pelo cliente
+     * @param cliente informações pessoais do cliente
+     * @return lista de empréstimos que representa as opções de pagamento
+     */
     public static List<Emprestimo> calcularIntervaloParcelas(Emprestimo emprestimoSolicitado, Cliente cliente) {
         List<Emprestimo> intervalo = new ArrayList<>();
         Double parcelaAnterior = 0.0;
