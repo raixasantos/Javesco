@@ -1,6 +1,5 @@
 package gui;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -10,12 +9,9 @@ import emprestimo.Bem;
 import emprestimo.GerenciadorFinanciamento;
 import emprestimo.Juros;
 
-// import emprestimo.Financiamento;
-// import Emprestimo.GerenciarEmprestimo;
-
 public class InterfaceGrafica {
 
-    private static Integer paginaMenu = 0;
+    private static Integer paginaMenu;
     private static Scanner scanner = new Scanner(System.in);
     private static String escolha;
     private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -24,7 +20,7 @@ public class InterfaceGrafica {
     }
     
     /**
-     * @throws IOException
+     * 
      * 
      */
     public static void limparConsole(){
@@ -94,17 +90,17 @@ public class InterfaceGrafica {
 
         if(GerenciadorFinanciamento.validarFinanciamento(valorFinanciamento, cliente)) {
             List<Juros> intervalo = GerenciadorFinanciamento.calcularIntervaloParcelas(valorFinanciamento, cliente);
-            System.out.println("Parabens voce foi aprovado em seu financiameto de "+valorFinanciamento+"! ("+tipoBem.name()+")");
-            System.out.println("As sua opções de parcelamento são:");
+            System.out.println("Parabéns "+cliente.getNome()+"! Você foi aprovado em seu financiamento de R$"+valorFinanciamento+",00! (Financiamento "+tipoBem.getTipoFinanciamento()+")");
+            System.out.println("Suas opções de parcelamento são:");
             intervalo.forEach(juros -> {
-                System.out.println(juros.getPrazoMeses()+"x de R$"+df.format(juros.getParcela())+ ". Total: "+df.format(juros.calcularMontante()));
+                System.out.println("-"+juros.getPrazoMeses()+" parcelas de R$"+df.format(juros.getParcela())+ ". Total de R$"+df.format(juros.calcularMontante())+".");
             });
             scanner.nextLine();// GAMBIARRA
-            System.out.println("[Aperte qualquer tecla para voltar ao menu.]");
+            System.out.println("[Aperte qualquer tecla para voltar ao menu]");
             scanner.nextLine();// GAMBIARRA
             limparConsole();
         }else
-            System.out.println("Emprestimo negado!");
+            System.out.println("Financiamento negado!");
     }
 
     /**
@@ -148,6 +144,7 @@ public class InterfaceGrafica {
      */
     public static void menu() {
         Cliente cliente = new Cliente();
+        paginaMenu = 0;
 
         while (true) {
             printAssinatura();
@@ -171,13 +168,13 @@ public class InterfaceGrafica {
                             printDespedida();
                             break;
                         default:
-                            System.out.println("Opção invalida!");
+                            System.out.println("Opção inválida!");
                     }
                     break;
                 case 1:
                     switch (escolha) {
                         case "1":
-                            simularFinanciamento(cliente, Bem.VEICULAR);
+                            simularFinanciamento(cliente, Bem.VEICULO);
                             break;
                         case "2":
                             simularFinanciamento(cliente, Bem.IMOVEL);
@@ -186,16 +183,10 @@ public class InterfaceGrafica {
                             printDespedida();
                             break;
                         default:
-                            System.out.println("Opção invalida!");
+                            System.out.println("Opção inválida!");
                     }
                     break;
             }
         }
     }
 }
-
-/*
- * TO DO
- * Javadoc
- * exception de preenchimento de dados do cliente/financiamento
- */
