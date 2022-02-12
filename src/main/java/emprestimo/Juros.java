@@ -2,22 +2,27 @@ package emprestimo;
 
 public class Juros {
     private Integer prazoMeses;
-    private Double montante;
+    private Double capital;
     private Double taxaJuros;
     private Double taxaImposto;
 
-    public Juros(Integer prazoMeses, Double montante, Double taxaJuros, Double taxaImposto){
-        this.prazoMeses = prazoMeses;
-        this.montante = montante;
+    public Juros(Double capital, Double taxaJuros, Integer prazoMeses){
+        this.capital = capital;
         this.taxaJuros = taxaJuros;
-        this.taxaImposto = taxaImposto;
+        this.prazoMeses = prazoMeses;
     }
 
+    public Juros(){}
+
+    public Double calcularMontante(){
+        // montante = capital * (1 + juros)^meses
+        return capital * Math.pow((1 + taxaJuros), Math.round(prazoMeses/12));
+    }
+    public Double getParcela(){
+        return calcularMontante()/prazoMeses;
+    }
     public Integer getPrazoMeses(){
         return prazoMeses;
-    }
-    public Double getMontante(){
-        return montante;
     }
     public Double getTaxaJuros(){
         return taxaJuros;
@@ -25,12 +30,16 @@ public class Juros {
     public Double getTaxaImposto(){
         return taxaImposto;
     }
+    public Double getCapital(){
+        return capital;
+    }
     
+    public void setCapital(Double capital){
+        this.capital = capital;
+    }
+
     public void setPrazoMeses(Integer prazoMeses){
         this.prazoMeses = prazoMeses;
-    }
-    public void setMontante(Double montante){
-        this.montante = montante;
     }
     public void setTaxaJuros(Double taxaJuros){
         this.taxaJuros = taxaJuros;
